@@ -1,23 +1,32 @@
-# This shows a more evil use of the code to create a skype message spammer.
-# Note that this code is provided for you to use educationally! Any other use
-# is not condoned by me.
+# Variable Prototypes
 
-# The text to be spammed
-property textToSpam : ""
+# The Skype Username to send messages to
+set recipient to ""
 
-# The Amount of times to spam
-property timesToSpam : 0
+# The text to be sent
+set textToSend to ""
 
-# The Time In between each Spam message being sent
-property timesBetweenSpam : 0.5
+# The Amount of times to send the message
+set timesToSend to 0
+
+# The time in between each message being sent
+set timeBetweenMessageSend to 0.2
+
+# The waitTime to let skype initalize
+set skypeInitWaitTime to 0.5
+
 
 # Chosen Message from user input
-display dialog "What message do you want to flood with?" default answer "I'm amazing" buttons {"OK"} default button 1
-set textToSpam to text returned of result
+display dialog "What message do you want to send?" default answer "I HAVE A SKYPE SPAMMER" buttons {"OK"} default button 1
+set textToSend to text returned of result
 
-# Sets the amount of times to spam
-display dialog "How Many times should we flood skype?" default answer "1000" buttons {"OK"} default button 1
-set timesToSpam to text returned of result
+# Sets the amount of times to send the message
+display dialog "How Many times should we send the message?" default answer "1000" buttons {"OK"} default button 1
+set timesToSend to text returned of result
+
+# Sets the username to send message to
+display dialog "What is the username of the person you want to send messages to." default answer "echo123" buttons {"OK"} default button 1
+set recipient to text returned of result
 
 # Activates Skype
 tell application "Skype"
@@ -25,19 +34,17 @@ tell application "Skype"
 end tell
 
 # Waits for Skype to Initialize
-# before flooding
-delay 0.5
+delay skypeInitWaitTime
 
-repeat timesToSpam times
+repeat timesToSend times
 	tell application "System Events"
 		
-		# Writes String as Keystrokes
-		keystroke textToSpam
-		
-		# Sends Keystroke
-		keystroke return
+		# Send the text through skype to the specified username.
+		tell application "Skype"
+			send command "MESSAGE " & recipient & " " & textToSend script name "messagesend"
+		end tell
 		
 		# Delays between the messages 
-		delay timesBetweenSpam
+		delay timeBetweenMessageSend
 	end tell
 end repeat
