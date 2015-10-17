@@ -3,4 +3,7 @@ This is a small applescript script that can be used to automagically send skype 
 
 
 ## Program Notes:
-This software works by emulating keystrokes and so will not work if you click out of your skype window. This is due to their not being a skype API for Applescript (or anything [(Skype Api Retirement)] (http://www.codeproject.com/Articles/13081/Controlling-Skype-with-C) ). To activate functionallity that will return to skype and activate it please set activateSkypeOnKeypress to "Yes" through the series of dialougs that you are presented with upon running the app.
+This software works by using the skype applescript api (decrepitated) to send message commands to skype. The advantage of using the api is that you can put skype in a the background as the messages are sent.
+
+## Legal
+Don't do anything stupid with this. Cause if you do im not responsible. :)
